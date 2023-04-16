@@ -25,6 +25,7 @@ public class PlayerController : MonoBehaviour
     private void FixedUpdate()
     {
         HandleMovement();
+        HandleRotation();
     }
 
     private void HandleMovement()
@@ -34,5 +35,14 @@ public class PlayerController : MonoBehaviour
         {
             body.AddForce(fixedJoystick.Direction * 10);
         }
+    }
+
+    private void HandleRotation()
+    {
+        float hAxis = fixedJoystick.Horizontal;
+        float vAxis = fixedJoystick.Vertical;
+        float zAxis = Mathf.Atan2(hAxis, vAxis) * Mathf.Rad2Deg;
+
+        transform.eulerAngles = new Vector3(0, 0, -zAxis);
     }
 }
