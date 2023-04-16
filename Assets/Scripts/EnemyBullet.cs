@@ -2,19 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyController : MonoBehaviour
+public class EnemyBullet : MonoBehaviour
 {
-
     Rigidbody2D body;
     Transform playerTransform;
     [SerializeField]
-    GameObject bullet;
-
-    [SerializeField]
-    float speed = 5;
-
-    private float bulletDuration = 0.5f;
-    private float bulletTimer = 0;
+    float speed = 10;
 
     // Start is called before the first frame update
     void Start()
@@ -26,12 +19,7 @@ public class EnemyController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (bulletTimer >= bulletDuration)
-        {
-            bulletTimer = 0;
-            Shoot();
-        }
-        bulletTimer += Time.deltaTime;
+        
     }
 
     private void FixedUpdate()
@@ -44,8 +32,11 @@ public class EnemyController : MonoBehaviour
         body.AddForce((playerTransform.position - transform.position) * speed);
     }
 
-    private void Shoot()
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        Instantiate(bullet, transform.position, Quaternion.identity);
+        if (collision.CompareTag("Player"))
+        {
+            Destroy(this.gameObject);
+        }
     }
 }

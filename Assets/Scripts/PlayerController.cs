@@ -33,7 +33,7 @@ public class PlayerController : MonoBehaviour
 
         if (fixedJoystick.JoystickPoinerDown)
         {
-            body.AddForce(fixedJoystick.Direction * 10);
+            body.AddForce(fixedJoystick.Direction * 50);
         }
     }
 
