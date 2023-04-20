@@ -11,12 +11,20 @@ public class PlayerController : MonoBehaviour
     FixedJoystick fixedJoystick;
 
     Vector2 moveVector;
+    [SerializeField]
+    private float moveSpeed;
 
     private float MAX_HP = 100;
     private float currentHp = 100;
 
     [SerializeField]
     private Image imgHp;
+
+    [SerializeField]
+    private GameObject bullet;
+
+    private float bulletDuration = 0.5f;
+    private float bulletTimer = 0f;
 
     // Start is called before the first frame update
     void Start()
@@ -27,6 +35,15 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(fixedJoystick.JoystickPoinerDown)
+        {
+            if (bulletTimer >= bulletDuration)
+            {
+                bulletTimer = 0;
+                Attack();
+            }
+            bulletTimer += Time.deltaTime;
+        }
     }
 
     private void FixedUpdate()
@@ -40,7 +57,7 @@ public class PlayerController : MonoBehaviour
 
         if (fixedJoystick.JoystickPoinerDown)
         {
-            body.AddForce(fixedJoystick.Direction * 50);
+            body.AddForce(fixedJoystick.Direction * moveSpeed);
         }
     }
 
@@ -74,5 +91,10 @@ public class PlayerController : MonoBehaviour
     private void GameOver()
     {
         // Restart game
+    }
+
+    private void Attack()
+    {
+        Instantiate(bullet, transform.position, Quaternion.identity).GetComponent<BulletController>().Setup(GameObject.FindGameObjectWithTag("enemy").transform);
     }
 }

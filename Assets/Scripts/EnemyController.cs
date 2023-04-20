@@ -48,4 +48,12 @@ public class EnemyController : MonoBehaviour
     {
         Instantiate(bullet, transform.position, Quaternion.identity);
     }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("player_bullet"))
+        { 
+            Destroy(collision.gameObject);
+        }
+    }
 }
