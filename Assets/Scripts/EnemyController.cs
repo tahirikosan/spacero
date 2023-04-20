@@ -23,6 +23,9 @@ public class EnemyController : MonoBehaviour
     [SerializeField]
     private Image imgHp;
 
+    [SerializeField]
+    private ScoreManager scoreManager;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -71,6 +74,7 @@ public class EnemyController : MonoBehaviour
         imgHp.fillAmount = currentHp / MAX_HP;
         if (currentHp <= 0)
         {
+            scoreManager.UpdateScore(10);
             Destroy(this.gameObject);
         }
     }
