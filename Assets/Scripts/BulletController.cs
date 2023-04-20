@@ -32,4 +32,12 @@ public class BulletController : MonoBehaviour
             body.AddForce((target.position - transform.position) * speed);
         }
     }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("enemy"))
+        {
+            Destroy(this.gameObject);
+        }
+    }
 }
