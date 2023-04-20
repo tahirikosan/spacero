@@ -25,10 +25,25 @@ public class PlayerController : MonoBehaviour
     private float bulletDuration = 0.5f;
     private float bulletTimer = 0f;
 
+    [SerializeField]
+    private List<GameObject> tails;
+    [SerializeField]
+    private GameObject tail;
+
+    private int level = 10; 
+
     // Start is called before the first frame update
     void Start()
     {
         body = GetComponent<Rigidbody2D>();
+
+        moveSpeed = level * 10;
+        for(int i=0; i<level; i++)
+        {
+            var tailObj = Instantiate(tail, transform.position, Quaternion.identity);
+            tailObj.GetComponent<TailController>().Setup(tails[i].GetComponent<Rigidbody2D>());
+            tails.Add(tailObj);
+        }
     }
 
     // Update is called once per frame
