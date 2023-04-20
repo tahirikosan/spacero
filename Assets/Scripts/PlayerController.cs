@@ -11,8 +11,7 @@ public class PlayerController : MonoBehaviour
     FixedJoystick fixedJoystick;
 
     Vector2 moveVector;
-    [SerializeField]
-    private float moveSpeed;
+    private float moveSpeed = 20f;
 
     private float MAX_HP = 100;
     private float currentHp = 100;
