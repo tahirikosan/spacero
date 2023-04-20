@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class EnemyController : MonoBehaviour
 {
@@ -15,6 +16,12 @@ public class EnemyController : MonoBehaviour
 
     private float bulletDuration = 0.5f;
     private float bulletTimer = 0;
+
+    private float MAX_HP = 100;
+    private float currentHp = 100;
+
+    [SerializeField]
+    private Image imgHp;
 
     // Start is called before the first frame update
     void Start()
@@ -52,8 +59,19 @@ public class EnemyController : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("player_bullet"))
-        { 
+        {
+            TakeDamage(10);
             Destroy(collision.gameObject);
+        }
+    }
+
+    private void TakeDamage(int damage)
+    {
+        currentHp -= damage;
+        imgHp.fillAmount = currentHp / MAX_HP;
+        if (currentHp <= 0)
+        {
+            Destroy(this.gameObject);
         }
     }
 }
