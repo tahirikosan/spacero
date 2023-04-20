@@ -609,6 +609,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fixedJoystick: {fileID: 513130619}
   imgHp: {fileID: 1207029992}
+  bullet: {fileID: 7825210481519353894, guid: 3cdcc86e8f55e9d4a85b99fb1bb30038, type: 3}
 --- !u!61 &1053489019
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -838,7 +839,7 @@ GameObject:
   - component: {fileID: 1599934545}
   m_Layer: 0
   m_Name: Enemy
-  m_TagString: Untagged
+  m_TagString: enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -856,7 +857,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bullet: {fileID: 7825210481519353894, guid: 8bc38ca2c7f381d48836378003699bfa, type: 3}
-  speed: 10
+  speed: 5
 --- !u!50 &1599934546
 Rigidbody2D:
   serializedVersion: 4
