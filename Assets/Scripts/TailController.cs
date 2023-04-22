@@ -8,9 +8,12 @@ public class TailController : MonoBehaviour
     private Rigidbody2D connectedBody;
     private HingeJoint2D hingeJoint2D;
 
-    public void Setup(Rigidbody2D rigidbody2D)
+    private GameObject bullet;
+
+    public void Setup(Rigidbody2D rigidbody2D, GameObject bullet)
     {
         connectedBody = rigidbody2D;
+        this.bullet = bullet;
     }
 
     // Start is called before the first frame update
@@ -24,5 +27,14 @@ public class TailController : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public void Attack()
+    {
+        var enemy = GameObject.FindGameObjectWithTag("enemy");
+        if (enemy != null)
+        {
+            Instantiate(bullet, transform.position, Quaternion.identity).GetComponent<BulletController>().Setup(enemy.transform);
+        }
     }
 }
