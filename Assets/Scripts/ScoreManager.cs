@@ -8,8 +8,11 @@ public class ScoreManager : MonoBehaviour
 
     [SerializeField]
     private Text txtScore;
+    [SerializeField]
+    private Text txtHighScore;
 
     private int score = 0;
+    private int highScore = 0;
 
     [SerializeField]
     private PlayerController playerController;
@@ -25,8 +28,19 @@ public class ScoreManager : MonoBehaviour
         }
     }
 
+    public void SetHighScore()
+    {
+        if (score > highScore)
+        {
+            highScore = score;
+            PlayerPrefs.SetInt("HIGH_SCORE", highScore);
+        }
+    }
+
     private void Start()
     {
+        highScore = PlayerPrefs.GetInt("HIGH_SCORE", 0);
+        txtHighScore.text = "HScore: " + highScore;
         UpdateScore(0);
     }
 
