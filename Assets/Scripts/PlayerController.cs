@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
@@ -14,8 +15,8 @@ public class PlayerController : MonoBehaviour
     private readonly int  MOVE_SPEED_MULTIPLIER = 10;
     private float moveSpeed = 20f;
 
-    private float MAX_HP = 100;
-    private float currentHp = 100;
+    private static float MAX_HP = 500;
+    private float currentHp = MAX_HP;
 
     [SerializeField]
     private Image imgHp;
@@ -39,6 +40,9 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField]
     private GameObject destroyEffect;
+
+    [SerializeField]
+    private ScoreManager scoreManager;
 
     // Start is called before the first frame update
     void Start()
@@ -112,7 +116,9 @@ public class PlayerController : MonoBehaviour
 
     private void GameOver()
     {
+        scoreManager.SetHighScore();
         // Restart game
+        SceneManager.LoadScene(0);
     }
 
     private void Attack()
