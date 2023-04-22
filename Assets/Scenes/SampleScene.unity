@@ -870,6 +870,7 @@ MonoBehaviour:
   tails: []
   tail: {fileID: 4485468273119117565, guid: 9ec86fc3dfca969498508f75a6b16322, type: 3}
   txtLevel: {fileID: 184612052}
+  destroyEffect: {fileID: 7063103624142551814, guid: cbba7d6571779324e9239a00137ba4e7, type: 3}
 --- !u!61 &1053489019
 BoxCollider2D:
   m_ObjectHideFlags: 0

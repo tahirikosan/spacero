@@ -240,7 +240,7 @@ MonoBehaviour:
   bullet: {fileID: 7825210481519353894, guid: 8bc38ca2c7f381d48836378003699bfa, type: 3}
   speed: 5
   healtBar: {fileID: 3898690387080889723}
-  scoreManager: {fileID: 0}
+  destroyEffect: {fileID: 7063103624142551814, guid: cbba7d6571779324e9239a00137ba4e7, type: 3}
 --- !u!61 &3898690387554311799
 BoxCollider2D:
   m_ObjectHideFlags: 0

@@ -37,6 +37,9 @@ public class PlayerController : MonoBehaviour
 
     public int Level { get => level; set => level = value; }
 
+    [SerializeField]
+    private GameObject destroyEffect;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -102,6 +105,7 @@ public class PlayerController : MonoBehaviour
         imgHp.fillAmount = currentHp / MAX_HP;
         if (currentHp <= 0)
         {
+            Instantiate(destroyEffect, transform.position, Quaternion.identity);
             GameOver();
         }
     }
