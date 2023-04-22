@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour
     FixedJoystick fixedJoystick;
 
     Vector2 moveVector;
+    private readonly int  MOVE_SPEED_MULTIPLIER = 10;
     private float moveSpeed = 20f;
 
     private float MAX_HP = 100;
@@ -30,20 +31,16 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private GameObject tail;
 
-    private int level = 10; 
+    private int level = 0; 
 
     // Start is called before the first frame update
     void Start()
     {
         body = GetComponent<Rigidbody2D>();
 
-        moveSpeed = level * 10;
-        for(int i=0; i<level; i++)
-        {
-            var tailObj = Instantiate(tail, transform.position, Quaternion.identity);
-            tailObj.GetComponent<TailController>().Setup(tails[i].GetComponent<Rigidbody2D>());
-            tails.Add(tailObj);
-        }
+        var tailObj = Instantiate(tail, transform.position, Quaternion.identity);
+        tailObj.GetComponent<TailController>().Setup(body);
+        tails.Add(tailObj);
     }
 
     // Update is called once per frame
@@ -110,5 +107,15 @@ public class PlayerController : MonoBehaviour
     private void Attack()
     {
         Instantiate(bullet, transform.position, Quaternion.identity).GetComponent<BulletController>().Setup(GameObject.FindGameObjectWithTag("enemy").transform);
+    }
+    public void UpdateLevel()
+    {
+        var prevTail = tails[level];
+        var tailObj = Instantiate(tail, prevTail.transform.position, Quaternion.identity);
+        tailObj.GetComponent<TailController>().Setup(prevTail.GetComponent<Rigidbody2D>());
+        tails.Add(tailObj);
+
+        level++;
+        moveSpeed = level * MOVE_SPEED_MULTIPLIER; 
     }
 }
