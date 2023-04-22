@@ -21,7 +21,7 @@ public class EnemyController : MonoBehaviour
     private float currentHp = 100;
 
     [SerializeField]
-    private Image imgHp;
+    private GameObject healtBar;
 
     [SerializeField]
     private ScoreManager scoreManager;
@@ -71,7 +71,7 @@ public class EnemyController : MonoBehaviour
     private void TakeDamage(int damage)
     {
         currentHp -= damage;
-        imgHp.fillAmount = currentHp / MAX_HP;
+        healtBar.transform.localScale = new Vector3(currentHp / MAX_HP, 1);
         if (currentHp <= 0)
         {
             scoreManager.UpdateScore(10);
