@@ -33,7 +33,9 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField]
     private Text txtLevel;
-    private int level = 0; 
+    private int level = 0;
+
+    public int Level { get => level; set => level = value; }
 
     // Start is called before the first frame update
     void Start()
@@ -86,9 +88,9 @@ public class PlayerController : MonoBehaviour
         transform.eulerAngles = new Vector3(0, 0, -zAxis);
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.CompareTag("enemy_bullet"))
+        if (collision.collider.CompareTag("enemy_bullet"))
         {
             TakeDamage(10);
         }
