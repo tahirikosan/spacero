@@ -11,10 +11,18 @@ public class ScoreManager : MonoBehaviour
 
     private int score = 0;
 
+    [SerializeField]
+    private PlayerController playerController;
+
     public void UpdateScore(int amount)
     {
         score += amount;
         txtScore.text = "SCORE: " + score;
+
+        if (score % 10 == 0 && score != 0)
+        {
+            playerController.UpdateLevel();
+        }
     }
 
     private void Start()
