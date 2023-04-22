@@ -25,6 +25,9 @@ public class EnemyController : MonoBehaviour
 
     private ScoreManager scoreManager;
 
+    [SerializeField]
+    private GameObject destroyEffect;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -78,6 +81,7 @@ public class EnemyController : MonoBehaviour
         {
             Destroy(this.gameObject);
             scoreManager.UpdateScore(10);
+            Instantiate(destroyEffect, transform.position, Quaternion.identity);
         }
     }
 }
