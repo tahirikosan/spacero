@@ -41,7 +41,7 @@ public class PlayerController : MonoBehaviour
         body = GetComponent<Rigidbody2D>();
 
         var tailObj = Instantiate(tail, transform.position, Quaternion.identity);
-        tailObj.GetComponent<TailController>().Setup(body);
+        tailObj.GetComponent<TailController>().Setup(body, bullet);
         tails.Add(tailObj);
 
         txtLevel.text = "Level: " + level;
@@ -56,6 +56,7 @@ public class PlayerController : MonoBehaviour
             {
                 bulletTimer = 0;
                 Attack();
+                TailAttack();
             } 
             bulletTimer += Time.deltaTime;
         }
@@ -110,13 +111,27 @@ public class PlayerController : MonoBehaviour
 
     private void Attack()
     {
-        Instantiate(bullet, transform.position, Quaternion.identity).GetComponent<BulletController>().Setup(GameObject.FindGameObjectWithTag("enemy").transform);
+        var enemy = GameObject.FindGameObjectWithTag("enemy");
+        if (enemy != null)
+        {
+            Instantiate(bullet, transform.position, Quaternion.identity).GetComponent<BulletController>().Setup(enemy.transform);
+        }
     }
+
+    private void TailAttack()
+    {
+        foreach (GameObject tailObj in tails)
+        {
+            tailObj.GetComponent<TailController>().Attack();
+        }
+    }
+
+
     public void UpdateLevel()
     {
         var prevTail = tails[level];
         var tailObj = Instantiate(tail, prevTail.transform.position, Quaternion.identity);
-        tailObj.GetComponent<TailController>().Setup(prevTail.GetComponent<Rigidbody2D>());
+        tailObj.GetComponent<TailController>().Setup(prevTail.GetComponent<Rigidbody2D>(), bullet);
         tails.Add(tailObj);
 
         level++;

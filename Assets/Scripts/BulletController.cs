@@ -8,7 +8,7 @@ public class BulletController : MonoBehaviour
     Rigidbody2D body;
     private Transform target;
     [SerializeField]
-    float speed = 200;
+    float speed = 1000;
 
     public void Setup(Transform target)
     {
@@ -19,6 +19,7 @@ public class BulletController : MonoBehaviour
     void Start()
     {
         body = GetComponent<Rigidbody2D>();
+        Destroy(this.gameObject, 1);
     }
 
     private void FixedUpdate()
