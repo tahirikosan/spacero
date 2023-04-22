@@ -31,6 +31,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private GameObject tail;
 
+    [SerializeField]
+    private Text txtLevel;
     private int level = 0; 
 
     // Start is called before the first frame update
@@ -41,6 +43,8 @@ public class PlayerController : MonoBehaviour
         var tailObj = Instantiate(tail, transform.position, Quaternion.identity);
         tailObj.GetComponent<TailController>().Setup(body);
         tails.Add(tailObj);
+
+        txtLevel.text = "Level: " + level;
     }
 
     // Update is called once per frame
@@ -52,7 +56,7 @@ public class PlayerController : MonoBehaviour
             {
                 bulletTimer = 0;
                 Attack();
-            }
+            } 
             bulletTimer += Time.deltaTime;
         }
     }
@@ -116,6 +120,7 @@ public class PlayerController : MonoBehaviour
         tails.Add(tailObj);
 
         level++;
-        moveSpeed = level * MOVE_SPEED_MULTIPLIER; 
+        moveSpeed = level * MOVE_SPEED_MULTIPLIER;
+        txtLevel.text = "Level: " + level;
     }
 }
