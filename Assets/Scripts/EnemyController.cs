@@ -23,7 +23,6 @@ public class EnemyController : MonoBehaviour
     [SerializeField]
     private GameObject healtBar;
 
-    [SerializeField]
     private ScoreManager scoreManager;
 
     // Start is called before the first frame update
@@ -31,6 +30,7 @@ public class EnemyController : MonoBehaviour
     {
         body = GetComponent<Rigidbody2D>();
         playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
+        scoreManager = GameObject.FindGameObjectWithTag("score_manager").GetComponent<ScoreManager>();
     }
 
     // Update is called once per frame
@@ -59,23 +59,25 @@ public class EnemyController : MonoBehaviour
         Instantiate(bullet, transform.position, Quaternion.identity);
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.CompareTag("player_bullet"))
+        if (collision.collider.CompareTag("player_bullet"))
         {
             TakeDamage(10);
             Destroy(collision.gameObject);
         }
     }
 
+
+
     private void TakeDamage(int damage)
     {
         currentHp -= damage;
         healtBar.transform.localScale = new Vector3(currentHp / MAX_HP, 1);
-        if (currentHp <= 0)
+        if (currentHp == 0)
         {
-            scoreManager.UpdateScore(10);
             Destroy(this.gameObject);
+            scoreManager.UpdateScore(10);
         }
     }
 }
