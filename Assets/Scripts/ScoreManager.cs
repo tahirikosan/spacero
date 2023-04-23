@@ -22,7 +22,7 @@ public class ScoreManager : MonoBehaviour
         score += amount;
         txtScore.text = "SCORE: " + score;
 
-        if (score % 10 == 0 && score != 0)
+        if (score >= (playerController.Level+1)*100 && score != 0)
         {
             playerController.UpdateLevel();
         }

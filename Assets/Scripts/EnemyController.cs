@@ -17,6 +17,7 @@ public class EnemyController : MonoBehaviour
     private float bulletDuration = 0.5f;
     private float bulletTimer = 0;
 
+    [SerializeField]
     private float MAX_HP = 100;
     private float currentHp = 100;
 
@@ -28,12 +29,17 @@ public class EnemyController : MonoBehaviour
     [SerializeField]
     private GameObject destroyEffect;
 
+    [SerializeField]
+    private int reward = 10;
+
     // Start is called before the first frame update
     void Start()
     {
         body = GetComponent<Rigidbody2D>();
         playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
         scoreManager = GameObject.FindGameObjectWithTag("score_manager").GetComponent<ScoreManager>();
+
+        currentHp = MAX_HP;
     }
 
     // Update is called once per frame
@@ -54,7 +60,7 @@ public class EnemyController : MonoBehaviour
 
     private void HandleMovement()
     {
-        body.AddForce((playerTransform.position - transform.position) * speed);
+        body.AddForce((playerTransform.position - transform.position).normalized * speed);
     }
 
     private void Shoot()
@@ -77,10 +83,10 @@ public class EnemyController : MonoBehaviour
     {
         currentHp -= damage;
         healtBar.transform.localScale = new Vector3(currentHp / MAX_HP, 1);
-        if (currentHp == 0)
+        if (currentHp <= 0)
         {
             Destroy(this.gameObject);
-            scoreManager.UpdateScore(10);
+            scoreManager.UpdateScore(reward);
             Instantiate(destroyEffect, transform.position, Quaternion.identity);
         }
     }
