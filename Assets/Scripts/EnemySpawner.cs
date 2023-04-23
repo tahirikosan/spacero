@@ -28,7 +28,7 @@ public class EnemySpawner : MonoBehaviour
             timer = 0;
             duration = Random.Range(3,5);
 
-            var enemyCount = Random.Range(1, playerController.Level);
+            var enemyCount = Random.Range(1, (playerController.Level/5)+1);
 
             for (int i =0; i<enemyCount; i++)
             {

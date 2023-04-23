@@ -12,8 +12,8 @@ public class PlayerController : MonoBehaviour
     FixedJoystick fixedJoystick;
 
     Vector2 moveVector;
-    private readonly int  MOVE_SPEED_MULTIPLIER = 10;
-    private float moveSpeed = 20f;
+    private readonly int  MOVE_SPEED_MULTIPLIER = 40;
+    private float moveSpeed = 40f;
 
     private static float MAX_HP = 500;
     private float currentHp = MAX_HP;
@@ -149,5 +149,8 @@ public class PlayerController : MonoBehaviour
         level++;
         moveSpeed = level * MOVE_SPEED_MULTIPLIER;
         txtLevel.text = "Level: " + level;
+
+        currentHp = MAX_HP;
+        imgHp.fillAmount = currentHp / MAX_HP;
     }
 }
