@@ -32,7 +32,7 @@ public class EnemySpawner : MonoBehaviour
 
             for (int i =0; i<enemyCount; i++)
             {
-                Instantiate(enemies[Random.Range(0, enemies.Count)], transform.position + new Vector3(Random.Range(-10,10), Random.Range(-10, 10)), Quaternion.identity);
+                Instantiate(enemies[Random.Range(0, enemies.Count)], transform.position + new Vector3(Random.Range(-5,5), Random.Range(-10, 10)), Quaternion.identity);
             }
         }
         timer += Time.deltaTime;
